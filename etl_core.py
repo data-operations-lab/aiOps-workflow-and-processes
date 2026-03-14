@@ -1,6 +1,7 @@
 """
-etl_core.py — Core ETL pipeline: extract from SQL Server, transform, load to cloud target.
-
+  Script:       etl_core.py
+  Author:       Misty Collins
+  Notes:        Core ETL pipeline: extract from SQL Server, transform, load to cloud target.
 Key features:
   • Chunked extraction (server-side cursor) to avoid OOM on large tables
   • Type coercion layer for MSSQL → ANSI SQL differences
