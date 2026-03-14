@@ -1,0 +1,19 @@
+L Server → Cloud Migration Toolkit
+# Install: pip install -r requirements.txt
+
+# ── Core ──────────────────────────────────────────────────────────────────────
+sqlalchemy>=2.0.0
+pandas>=2.0.0
+
+# ── Source: SQL Server ────────────────────────────────────────────────────────
+pyodbc>=5.0.0              # requires ODBC Driver 17 or 18 for SQL Server
+# mssql-django              # optional, only for Django projects
+
+# ── Target: Aurora / AlloyDB (PostgreSQL) ────────────────────────────────────
+psycopg2-binary>=2.9.0     # swap for psycopg2 in production for performance
+
+# ── Target: Azure SQL (T-SQL path) ───────────────────────────────────────────
+# pyodbc covers Azure SQL too — no extra package needed
+
+# ── Optional: progress bars ───────────────────────────────────────────────────
+tqdm>=4.60.0
