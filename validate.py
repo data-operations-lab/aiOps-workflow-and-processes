@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-validate.py — Post-migration data validation.
+Script:       validate.py
+Author:       Misty Collins
+Notes:  Post-migration data validation.
 
 Checks for each migrated table:
   1. Row counts match source vs target
