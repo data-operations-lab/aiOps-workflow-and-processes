@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
-
-/*
+'''
 ==============================================================================
   Script:        cloud_targets.py
   Author:        Misty Collins
   Notes:         Engine factory for cloud databases
 ==============================================================================
-*/
+'''
 
-
-"""
 schema_export.py — Export SQL Server schema and emit target-compatible DDL.
 
 Generates CREATE TABLE statements adjusted for each cloud target:
