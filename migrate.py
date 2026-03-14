@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-migrate.py — SQL Server → Cloud ETL Orchestrator
+Script:       migrate.py
+Author:       Misty Collins
+Notes:  SQL Server → Cloud ETL Orchestrator
 Supports: Amazon Aurora (PostgreSQL), Azure SQL, Google AlloyDB
 
 Usage:
