@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-schema_export.py — Export SQL Server schema and emit target-compatible DDL.
+Script:       schema_export.py
+Author:       Misty Collins
+Notes: Export SQL Server schema and emit target-compatible DDL.
 
 Generates CREATE TABLE statements adjusted for each cloud target:
   • Aurora / AlloyDB (PostgreSQL) : MSSQL types → PG types, identity → SERIAL/BIGSERIAL
