@@ -1,0 +1,16 @@
+# Generated files
+schema.sql
+*.log
+*.exe
+
+# Throwaway scripts
+fix.py
+apply.py
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Secrets
+*.env
+config.ini
