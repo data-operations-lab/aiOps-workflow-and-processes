@@ -24,6 +24,29 @@ self-teaching project by a SQL Server DBA returning to the field.
 | Amazon Aurora | Coming soon | In progress |
 
 ---
+## Cross-Cloud Database Migration Workflow
+
+```mermaid
+flowchart LR
+    A[Source Database<br>SQL Server or PostgreSQL]
+    B[Schema Export]
+    C[ETL Processing]
+    D[Validation]
+    E[Migration Engine]
+
+    F[GCP Targets<br>AlloyDB / Cloud SQL]
+    G[Azure Targets<br>Azure SQL / Postgres]
+    H[AWS Targets<br>RDS / Aurora]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+
+    E --> F
+    E --> G
+    E --> H
+
 
 ## Scripts
 
