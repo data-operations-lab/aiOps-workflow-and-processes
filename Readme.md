@@ -5,7 +5,13 @@
 **Built:** Pi Day, March 14, 2026  
 **Status:** Active — Google AlloyDB validated
 
----
+---notepad Readme.md
+```
+
+Scroll to the very bottom and add:
+```
+## Azure SQL
+In progress — coming soon!
 
 ## What this does
 
