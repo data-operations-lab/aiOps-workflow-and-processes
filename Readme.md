@@ -1,11 +1,27 @@
-# aiOps Workflow — SQL Server to Cloud Migration Toolkit
 
-**Author:** Misty Collins  
-**GitHub:** [data-operations-lab](https://github.com/data-operations-lab)  
-**Built:** Pi Day, March 14, 2026  
-**Status:** Active — Google AlloyDB validated
 
----
+## Cross-Cloud Database Migration Workflow
+
+```mermaid
+flowchart LR
+    A[Source Database<br>SQL Server or PostgreSQL]
+    B[Schema Export]
+    C[ETL Processing]
+    D[Validation]
+    E[Migration Engine]
+
+    F[GCP Targets<br>AlloyDB / Cloud SQL]
+    G[Azure Targets<br>Azure SQL / Postgres]
+    H[AWS Targets<br>RDS / Aurora]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+
+    E --> F
+    E --> G
+    E --> H
 
 ## What this does
 
@@ -85,7 +101,7 @@ python validate.py \
   --checksum
 ```
 
----
+
 
 ## Validated results
 
