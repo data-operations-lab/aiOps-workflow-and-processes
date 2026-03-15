@@ -1,107 +1,98 @@
-# SQL Server → Cloud Migration Toolkit
+# aiOps Workflow — SQL Server to Cloud Migration Toolkit
 
-Migrate on-premise SQL Server databases to Google AlloyDB using a modular Python ETL pipeline.
-
----
-
-## Files
-
-| File               | Purpose                                              |
-|--------------------|------------------------------------------------------|
-| `migrate.py`       | Main orchestrator — runs the full ETL pipeline       |
-| `etl_core.py`      | Extract / Transform / Load engine with retry logic   |
-| `cloud_targets.py` | Engine factory for Aurora, Azure SQL, AlloyDB        |
-| `schema_export.py` | Export SQL Server DDL → cloud-compatible CREATE TABLE|E.
-| `validate.py`      | Post-migration row-count & checksum validation       |
-| `requirements.txt` | Python dependencies                                  |
+**Author:** Misty Collins  
+**GitHub:** [data-operations-lab](https://github.com/data-operations-lab)  
+**Built:** Pi Day, March 14, 2026  
+**Status:** Active — Google AlloyDB validated
 
 ---
 
-## Prerequisites
+## What this does
 
+Migrates on-premise SQL Server databases to cloud-native platforms 
+using a modular Python ETL pipeline. Built from scratch as a 
+self-teaching project by a SQL Server DBA returning to the field.
+
+---
+
+## Supported cloud targets
+
+| Platform | Status | Notes |
+|---|---|---|
+| Google AlloyDB | Tested and validated | Migrated and checksummed |
+| Azure SQL | Coming soon | In progress |
+| Amazon Aurora | Coming soon | In progress |
+
+---
+
+## Scripts
+
+| File | Purpose |
+|---|---|
+| `migrate.py` | Main ETL orchestrator — runs the full pipeline |
+| `etl_core.py` | Extract, transform, load engine with retry logic |
+| `cloud_targets.py` | Cloud connection factory for all three targets |
+| `schema_export.py` | DDL export and MSSQL to PostgreSQL type conversion |
+| `validate.py` | Post-migration row count and checksum validation |
+
+---
+
+## Quick start
 ```bash
+# Install dependencies
 pip install -r requirements.txt
-```
 
-Install ODBC Driver for SQL Server:
-- **Windows**: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server
-- **Linux**: `sudo apt-get install msodbcsql18`
-- **macOS**: `brew install microsoft/mssql-release/msodbcsql18`
-
----
-
-## Quick Start
-
-### 1 — Export the schema
-
-```bash
-# Generate PostgreSQL-compatible DDL (for Aurora or AlloyDB)
+# Export schema
 python schema_export.py \
-    --source "mssql+pyodbc://sa:Password1@localhost/Northwind?driver=ODBC+Driver+17+for+SQL+Server" \
-    --target aurora \
-    --schema dbo \
-    --output schema_aurora.sql
+  --source "mssql+pyodbc://user:pass@localhost/dbname?driver=ODBC+Driver+17+for+SQL+Server" \
+  --target alloydb \
+  --output schema.sql
 
-# Apply DDL on the target
-psql -h your-aurora-cluster -U admin -d yourdb -f schema_aurora.sql
-```
-
-### 2 — Migrate data
-
-``` Google AlloyDB (via AlloyDB Auth Proxy on localhost)
+# Migrate data
 python migrate.py \
-    --source "mssql+pyodbc://sa:Password1@localhost/Northwind?driver=ODBC+Driver+17+for+SQL+Server" \
-    --target alloydb \
-    --target-dsn "postgresql+psycopg2://admin:pass@127.0.0.1:5432/northwind" \
-    --batch-size 5000
-```
+  --source "mssql+pyodbc://user:pass@localhost/dbname?driver=ODBC+Driver+17+for+SQL+Server" \
+  --target alloydb \
+  --target-dsn "postgresql+psycopg2://user:pass@127.0.0.1:5432/postgres" \
+  --batch-size 5000
 
-### 3 — Validate
-
-```bash
+# Validate
 python validate.py \
-    --source "mssql+pyodbc://sa:Password1@localhost/Northwind?driver=ODBC+Driver+17+for+SQL+Server" \
-    --target-dsn "postgresql+psycopg2://admin:pass@cluster.cluster-xxxx.us-east-1.rds.amazonaws.com:5432/northwind" \
-    --schema dbo \
-    --checksum
+  --source "mssql+pyodbc://user:pass@localhost/dbname?driver=ODBC+Driver+17+for+SQL+Server" \
+  --target-dsn "postgresql+psycopg2://user:pass@127.0.0.1:5432/postgres" \
+  --checksum
 ```
 
 ---
 
-## Useful Flags
+## Validated results
 
-| Flag            | Default | Description                                |
-|-----------------|---------|--------------------------------------------|
-| `--batch-size`  | 5000    | Rows fetched/written per chunk             |
-| `--workers`     | 4       | Parallel table migration threads           |
-| `--dry-run`     | off     | Preview without writing to target          |
-| `--truncate`    | off     | Truncate target table before each load     |
-| `--tables`      | all     | Space-separated list of specific tables    |
-| `--schema`      | dbo     | Source SQL Server schema                   |
+| Check | Result |
+|---|---|
+| Row count | PASS — src=5 tgt=5 |
+| Checksum | PASS — src=15.0 tgt=15.0 |
+| Tables failed | 0 |
 
 ---
 
-## Type Mapping Reference (SQL Server → PostgreSQL)
+## Tech stack
 
-| SQL Server        | Aurora / AlloyDB     |
-|-------------------|----------------------|
-| BIT               | BOOLEAN              |
-| TINYINT           | SMALLINT             |
-| MONEY             | NUMERIC(19,4)        |
-| NVARCHAR(n)       | VARCHAR(n)           |
-| NTEXT             | TEXT                 |
-| IMAGE             | BYTEA                |
-| UNIQUEIDENTIFIER  | UUID                 |
-| DATETIME / DATETIME2 | TIMESTAMP         |
-| DATETIMEOFFSET    | TIMESTAMPTZ          |
-| XML               | TEXT                 |
+| Tool | Version | Purpose |
+|---|---|---|
+| Python | 3.14 | Runtime |
+| SQLAlchemy | 2.0.48 | Database abstraction |
+| pandas | 3.0.1 | Data transformation |
+| psycopg2 | 2.9.11 | PostgreSQL driver |
+| pyodbc | 5.3.0 | SQL Server driver |
 
 ---
 
-## Tips
+## Requirements
 
-- **Large tables**: increase `--batch-size` to 50000 for tables > 10M rows and ensure your cloud target has `work_mem` ≥ 256 MB.
-- **AlloyDB**: run the [AlloyDB Auth Proxy](https://cloud.google.com/alloydb/docs/auth-proxy/overview) locally for secure connectivity.
-- **Azure SQL**: ensure the firewall rule allows connections from your migration host IP.
-- **Identity columns**: `schema_export.py` automatically converts `IDENTITY(1,1)` → `SERIAL`/`BIGSERIAL` on PostgreSQL targets and preserves `IDENTITY` on Azure SQL.
-- **Stored procedures / views**: not migrated by this toolkit — use SQL Server Migration Assistant (SSMA) for procedural code conversion.
+- Python 3.10+
+- ODBC Driver 17 or 18 for SQL Server
+- Google Cloud account for AlloyDB
+- AlloyDB Auth Proxy for secure tunnel
+
+---
+
+*Built with Python on Pi Day 2026 — SQL Server DBA learning cloud migration from scratch*
