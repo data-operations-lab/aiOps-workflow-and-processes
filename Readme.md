@@ -28,9 +28,7 @@ flowchart LR
 ## This project explores a modular workflow for migrating relational databases to modern cloud platforms.  
 The pipeline separates schema extraction, ETL processing, validation, and migration so that different cloud database targets can be supported with minimal changes.
 
-Migrates on-premise SQL Server databases to cloud-native platforms 
-using a modular Python ETL pipeline. Built from scratch as a 
-self-teaching project by a SQL Server DBA returning to the field.
+
 
 ## Supported cloud targets
 
@@ -115,4 +113,4 @@ python validate.py \
 
 ---
 
-*Built with Python on Pi Day 2026 — SQL Server DBA learning cloud migration from scratch*
+
