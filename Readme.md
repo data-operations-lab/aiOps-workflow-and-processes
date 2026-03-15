@@ -22,6 +22,7 @@ flowchart LR
     E --> F
     E --> G
     E --> H
+```
 
 ## What this does
 
