@@ -44,7 +44,7 @@ The pipeline separates schema extraction, ETL processing, validation, and migrat
 | Azure SQL | Coming soon | In progress |
 | Amazon Aurora | Coming soon | In progress |
 
----
+
 ## Cross-Cloud Database Migration Workflow
 
 ```mermaid
