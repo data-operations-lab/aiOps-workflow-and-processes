@@ -32,10 +32,6 @@ Migrates on-premise SQL Server databases to cloud-native platforms
 using a modular Python ETL pipeline. Built from scratch as a 
 self-teaching project by a SQL Server DBA returning to the field.
 
----
-## This project explores a modular workflow for migrating relational databases to modern cloud platforms.  
-The pipeline separates schema extraction, ETL processing, validation, and migration so that different cloud database targets can be supported with minimal changes.
-
 ## Supported cloud targets
 
 | Platform | Status | Notes |
@@ -45,29 +41,9 @@ The pipeline separates schema extraction, ETL processing, validation, and migrat
 | Amazon Aurora | Coming soon | In progress |
 
 
-## Cross-Cloud Database Migration Workflow
 
-```mermaid
-flowchart LR
-    A[Source Database<br>SQL Server or PostgreSQL]
-    B[Schema Export]
-    C[ETL Processing]
-    D[Validation]
-    E[Migration Engine]
 
-    F[GCP Targets<br>AlloyDB / Cloud SQL]
-    G[Azure Targets<br>Azure SQL / Postgres]
-    H[AWS Targets<br>RDS / Aurora]
 
-    A --> B
-    B --> C
-    C --> D
-    D --> E
-
-    E --> F
-    E --> G
-    E --> H
-```
 
 ## Scripts
 
