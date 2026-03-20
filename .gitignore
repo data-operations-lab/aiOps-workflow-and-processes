@@ -1,11 +1,14 @@
 # Generated files
 schema.sql
+schema_azure.sql
 *.log
 *.exe
 
 # Throwaway scripts
 fix.py
 apply.py
+apply_azure.py
+test_azure_connection.py
 
 # Python cache
 __pycache__/

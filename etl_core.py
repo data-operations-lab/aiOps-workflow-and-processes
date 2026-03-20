@@ -51,7 +51,7 @@ class ETLPipeline:
         source_dsn: str,
         target_engine: sa.engine.Engine,
         schema: str = "dbo",
-        batch_size: int = 5000,
+        batch_size: int = 100,
         workers: int = 4,
         dry_run: bool = False,
         truncate: bool = False,
