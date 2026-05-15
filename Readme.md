@@ -26,7 +26,7 @@ self-teaching project by a SQL Server DBA returning to the field.
 | Platform | Status | Notes |
 |---|---|---|
 | Google AlloyDB | Tested and validated | Migrated and checksummed |
-| Azure SQL | Coming soon | In progress |
+| Azure SQL | Tested and validated | Migrated and checkedsummed April 21, 2026
 | Amazon Aurora | Coming soon | In progress |
 
 ---
