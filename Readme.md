@@ -11,7 +11,7 @@
 Scroll to the very bottom and add:
 ```
 ## Azure SQL
-In progress — coming soon!
+
 
 ## What this does
 
