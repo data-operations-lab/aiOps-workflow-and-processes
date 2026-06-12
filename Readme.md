@@ -34,9 +34,9 @@ The pipeline separates schema extraction, ETL processing, validation, and migrat
 
 | Platform | Status | Notes |
 |---|---|---|
-| Google AlloyDB | Tested and validated | Migrated and checksummed |
-| Azure SQL | Coming soon | In progress |
-| Amazon Aurora | Coming soon | In progress |
+| Google AlloyDB | Tested and validated | Migrated and checksummed 
+| Azure SQL |  Tested and validated | Migrated and checksummed 
+| Amazon Aurora |  Tested and validated | Migrated and checksummed 
 
 
 
@@ -84,12 +84,11 @@ python validate.py \
 
 ## Validated results
 
-| Check | Result |
-|---|---|
-| Row count | PASS — src=5 tgt=5 |
-| Checksum | PASS — src=15.0 tgt=15.0 |
-| Tables failed | 0 |
-
+| Target | Tables | Row count | Result |
+|---|---|---|---|
+| Google AlloyDB | 1 | src=5 tgt=5 | PASS |
+| Azure SQL | 13 | src=3,308 tgt=3,308 | PASS |
+| Amazon Aurora | 11 | src=3,308 tgt=3,308 | PASS |
 ---
 
 ## Tech stack
@@ -110,6 +109,8 @@ python validate.py \
 - ODBC Driver 17 or 18 for SQL Server
 - Google Cloud account for AlloyDB
 - AlloyDB Auth Proxy for secure tunnel
+- Azure account for Azure SQL
+- AWS account for Amazon Aurora
 
 ---
 
