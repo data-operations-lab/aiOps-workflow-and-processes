@@ -111,7 +111,7 @@ python validate.py \
 - AlloyDB Auth Proxy for secure tunnel
 - Azure account for Azure SQL
 - AWS account for Amazon Aurora
-- 
+  
 ## Project Intent
 
 This repository exists to document and share practical database migration workflows that others may find useful. Contributions, improvements, and adaptations are welcome. If you use any part of this project, please test thoroughly in your own environment and adapt it to your operational requirements.
