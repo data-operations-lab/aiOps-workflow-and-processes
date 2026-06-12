@@ -113,5 +113,22 @@ python validate.py \
 - AWS account for Amazon Aurora
 
 ---
+## Disclaimer
+
+This project is provided for educational, research, and operational reference purposes. It demonstrates one approach to database schema migration, ETL processing, and validation across multiple cloud database platforms.
+
+The scripts and examples are provided "AS IS", without warranty of any kind. Users are responsible for reviewing, testing, and validating all code before use in development, staging, or production environments.
+
+The author makes no guarantees regarding performance, compatibility, security, data integrity, regulatory compliance, or suitability for any specific use case. Always perform backups and testing before executing migrations against live systems.
+## License
+
+Copyright (c) 2026 Misty Collins
+
+Licensed under the MIT License.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, subject to the conditions of the MIT License.
+
+See the LICENSE file in this repository for the full license text.
+
 
 
